@@ -28,7 +28,7 @@ def home():
 
 @app.route("/iniciarSesion/",methods=["POST"])
 def iniciarSesion():
-    mensaje=" "
+    mensaje=None
     try:
         if request.method=='POST':
             if recaptcha.verify():
