@@ -103,14 +103,21 @@ def listarPeliculas():
         return render_template("iniciarSesion.html", mensaje=mensaje)
 @app.route("/agregarPelicula/",methods=["GET"])
 def AgregarPelicula():
-    generos=Genero.objects()
-    return render_template("AgregarPelicula.html", generos=generos)
+    if("user" in session):
+        generos=Genero.objects()
+        return render_template("AgregarPelicula.html", generos=generos)
+    else:
+        mensaje="debe ingresar primero"
+        return render_template("iniciarSesion.html", mensaje=mensaje)
 
 @app.route("/editarPelicula/<string:id>/",methods=["GET"])
 def EditarPelicula(id):
-    peliculas=Pelicula.objects(id=ObjectId(id)).first()
-    generos=Genero.objects()
-    
-    return render_template("EditarPelicula.html", peliculas=peliculas, generos=generos)
+    if("user" in session):
+        peliculas=Pelicula.objects(id=ObjectId(id)).first()
+        generos=Genero.objects()
+        return render_template("EditarPelicula.html", peliculas=peliculas, generos=generos)
+    else:
+        mensaje="debe ingresar primero"
+        return render_template("iniciarSesion.html", mensaje=mensaje)
 
 

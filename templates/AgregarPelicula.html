@@ -45,6 +45,14 @@
                 <label class="fw-bold" for="txtresumen">Resumen:</label>
                 <textarea name="txtResumen" id="txtResumen" cols="30" rows="3" class="form-control" required></textarea>
             </div>
+            <div class="mt-2">
+                <label for="fileFoto" class="fw-bold">Foto:</label>
+                <input type="file" name="fileFoto" id="fileFoto" accept="image/png, image/gif, image/jpeg"
+                class="form-control" onchange="mostrarImagen(event)" required>
+            </div>
+            <div class="mt-2 text-center">
+                <img id="imagenPelicula" src="" alt="" width="80" height="80">
+            </div>
             <div>
                 <button type="button" class="btn btn-dark" onclick="agregarPelicula()">Agregar</button>
                 <a href="/peliculas/"><button type="button" class="btn btn-secondary">Cancelar</button></a>

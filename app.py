@@ -12,7 +12,7 @@ app.secret_key="12uyi348re589"
 uri=os.environ.get("URI")
 db=os.environ.get("DB")
 
-app.config["UPLOAD_FOLDER"]= "./static/imagenes"
+app.config["UPLOAD_FOLDER"]= "./static/img"
 app.config['MONGODB_SETTINGS']=[{
     "db":db,
     "host":uri

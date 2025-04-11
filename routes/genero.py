@@ -1,5 +1,5 @@
 from app import app
-from flask import request, render_template
+from flask import request, render_template, session
 from models.genero import Genero
 from models.pelicula import Pelicula
 from bson.objectid import ObjectId
@@ -82,25 +82,37 @@ def deleteGenero():
 
 @app.route("/generos/", methods=['GET'])
 def listarGeneros():
-    try:    
-        mensaje=" "
-        generos=Genero.objects()
+    if("user" in session):
+        try:    
+            mensaje=" "
+            generos=Genero.objects()
         
-    except Exception as error:
-         mensaje=str(error)
-    return render_template("listarGenero.html",generos=generos, mensaje=mensaje)
+        except Exception as error:
+            mensaje=str(error)
+        return render_template("listarGenero.html",generos=generos, mensaje=mensaje)
+    else:
+        mensaje="debe ingresar primero"
+        return render_template("iniciarSesion.html", mensaje=mensaje)
 
 
 @app.route("/vistaGenero/")
 def AGenero():
-    return render_template("AgregarGenero.html")
+    if("user" in session):
+        return render_template("AgregarGenero.html")
+    else:
+        mensaje="debe ingresar primero"
+        return render_template("iniciarSesion.html", mensaje=mensaje)
 
 @app.route("/editarGenero/<id>", methods=["GET"])
 def editarGenero(id):
-    try:
-        mensaje=" "
-        genero=Genero.objects(id=ObjectId(id)).first()
-        print(genero)
-    except Exception as error:
-        mensaje=str(error)
-    return render_template("EditarGenero.html",genero=genero, mensaje=mensaje)
+    if("user" in session):   
+        try:
+            mensaje=" "
+            genero=Genero.objects(id=ObjectId(id)).first()
+            print(genero)
+        except Exception as error:
+            mensaje=str(error)
+        return render_template("EditarGenero.html",genero=genero, mensaje=mensaje)
+    else:
+        mensaje="debe ingresar primero"
+        return render_template("iniciarSesion.html", mensaje=mensaje)
