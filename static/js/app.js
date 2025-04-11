@@ -64,7 +64,7 @@ function agregarPelicula(){
         duracion: document.getElementById('txtDuracion').value,
         resumen: document.getElementById('txtResumen').value,
         genero: document.getElementById('cbGenero').value,
-        foto: ''
+        foto:document.getElementById('fileFoto').value
     }
     fetch(url, {
         method: "POST",
@@ -119,7 +119,7 @@ function editarPelicula(id){
             duracion:document.getElementById('txtDuracion').value,
             resumen:document.getElementById('txtResumen').value,
             genero:document.getElementById('cbGenero').value,
-            foto:('')
+            foto:document.getElementById('fileFoto').value
         }
         const url="/pelicula/"
         fetch(url, {
